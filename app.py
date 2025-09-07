@@ -12,12 +12,12 @@ st.write("This app predicts **fetal health status** (Normal, Suspect, Pathologic
 st.header("Enter Fetal Health Test Values")
 
 baseline_value = st.number_input("Baseline Value (beats per minute)", min_value=50.0, max_value=200.0, step=0.1, format="%.4f")
-accelerations = st.number_input("Accelerations (per second)", min_value=0.0, max_value=1.0, step=0.0001, format="%.4f")
+accelerations = st.number_input("Accelerations (per second)", min_value=0.0, max_value=10.0, step=0.0001, format="%.4f")
 fetal_movement = st.number_input("Fetal Movement (per second)", min_value=0.0, max_value=10.0, step=0.0001, format="%.4f")
-uterine_contractions = st.number_input("Uterine Contractions (per second)", min_value=0.0, max_value=1.0, step=0.0001, format="%.4f")
-light_decelerations = st.number_input("Light Decelerations (per second)", min_value=0.0, max_value=1.0, step=0.0001, format="%.4f")
-severe_decelerations = st.number_input("Severe Decelerations (per second)", min_value=0.0, max_value=1.0, step=0.0001, format="%.4f")
-prolongued_decelerations = st.number_input("Prolongued Decelerations (per second)", min_value=0.0, max_value=1.0, step=0.0001, format="%.4f")
+uterine_contractions = st.number_input("Uterine Contractions (per second)", min_value=0.0, max_value=10.0, step=0.0001, format="%.4f")
+light_decelerations = st.number_input("Light Decelerations (per second)", min_value=0.0, max_value=10.0, step=0.0001, format="%.4f")
+severe_decelerations = st.number_input("Severe Decelerations (per second)", min_value=0.0, max_value=10.0, step=0.0001, format="%.4f")
+prolongued_decelerations = st.number_input("Prolongued Decelerations (per second)", min_value=0.0, max_value=10.0, step=0.0001, format="%.4f")
 mean_short_var = st.number_input("Mean Value of Short Term Variability", min_value=0.0, max_value=10.0, step=0.0001, format="%.4f")
 mean_long_var = st.number_input("Mean Value of Long Term Variability", min_value=0.0, max_value=50.0, step=0.0001, format="%.4f")
 histogram_mean = st.number_input("Histogram Mean", min_value=50.0, max_value=200.0, step=0.1, format="%.4f")
@@ -48,4 +48,5 @@ if st.button("Predict Fetal Health"):
         st.warning("⚠️ Predicted Fetal Health: **Suspect**")
     else:
         st.error("🚨 Predicted Fetal Health: **Pathological**")
+
 

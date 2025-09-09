@@ -8,22 +8,30 @@ model = joblib.load("randomforest_model1.joblib")
 st.title("🩺 Fetal Health Prediction App")
 st.write("This app predicts **fetal health status** (Normal, Suspect, Pathological) using machine learning.")
 
-# Define feature inputs (11 features you selected)
+# ✅ Helper function for safe float conversion
+def safe_float_input(label, hint, default="0.0"):
+    val = st.text_input(f"{label} {hint}", default)
+    try:
+        return float(val)
+    except ValueError:
+        st.warning(f"⚠️ Please enter a numeric value for: {label}. Using default {default}.")
+        return float(default)
+
+# ✅ Feature inputs (with guidelines for user)
 st.header("Enter Fetal Health Test Values")
+baseline_value = safe_float_input("Baseline Value (beats per minute)", "[typical: 110–160]", "120")
+accelerations = safe_float_input("Accelerations (per second)", "[e.g., 0.0001 – 0.02]", "0.002")
+fetal_movement = safe_float_input("Fetal Movement (per second)", "[e.g., 0 – 5]", "0.5")
+uterine_contractions = safe_float_input("Uterine Contractions (per second)", "[e.g., 0 – 1]", "0.003")
+light_decelerations = safe_float_input("Light Decelerations (per second)", "[e.g., 0 – 1]", "0.002")
+severe_decelerations = safe_float_input("Severe Decelerations (per second)", "[e.g., 0 – 0.1]", "0.0")
+prolongued_decelerations = safe_float_input("Prolongued Decelerations (per second)", "[e.g., 0 – 0.5]", "0.0")
+mean_short_var = safe_float_input("Mean Value of Short Term Variability", "[e.g., 0.5 – 7]", "2.0")
+mean_long_var = safe_float_input("Mean Value of Long Term Variability", "[e.g., 5 – 50]", "20")
+histogram_mean = safe_float_input("Histogram Mean", "[e.g., 100 – 150]", "120")
+histogram_variance = safe_float_input("Histogram Variance", "[e.g., 0 – 100]", "20")
 
-baseline_value = st.number_input("Baseline Value (beats per minute)", min_value=50.0, max_value=200.0, step=0.1, format="%.4f")
-accelerations = st.number_input("Accelerations (per second)", min_value=0.0, max_value=10.0, step=0.0001, format="%.4f")
-fetal_movement = st.number_input("Fetal Movement (per second)", min_value=0.0, max_value=10.0, step=0.0001, format="%.4f")
-uterine_contractions = st.number_input("Uterine Contractions (per second)", min_value=0.0, max_value=10.0, step=0.0001, format="%.4f")
-light_decelerations = st.number_input("Light Decelerations (per second)", min_value=0.0, max_value=10.0, step=0.0001, format="%.4f")
-severe_decelerations = st.number_input("Severe Decelerations (per second)", min_value=0.0, max_value=10.0, step=0.0001, format="%.4f")
-prolongued_decelerations = st.number_input("Prolongued Decelerations (per second)", min_value=0.0, max_value=10.0, step=0.0001, format="%.4f")
-mean_short_var = st.number_input("Mean Value of Short Term Variability", min_value=0.0, max_value=10.0, step=0.0001, format="%.4f")
-mean_long_var = st.number_input("Mean Value of Long Term Variability", min_value=0.0, max_value=50.0, step=0.0001, format="%.4f")
-histogram_mean = st.number_input("Histogram Mean", min_value=50.0, max_value=200.0, step=0.1, format="%.4f")
-histogram_variance = st.number_input("Histogram Variance", min_value=0.0, max_value=100.0, step=0.1, format="%.4f")
-
-# Collect all features in the same order as training
+# ✅ Collect all features
 features = np.array([[
     baseline_value,
     accelerations,
@@ -38,7 +46,7 @@ features = np.array([[
     histogram_variance
 ]])
 
-# Predict button
+# ✅ Predict button
 if st.button("Predict Fetal Health"):
     prediction = model.predict(features)[0]
 
@@ -48,5 +56,4 @@ if st.button("Predict Fetal Health"):
         st.warning("⚠️ Predicted Fetal Health: **Suspect**")
     else:
         st.error("🚨 Predicted Fetal Health: **Pathological**")
-
 

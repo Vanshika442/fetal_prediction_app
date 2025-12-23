@@ -4,7 +4,8 @@ import numpy as np
 import pandas as pd   # ✅ ADD THIS
 
 # Load model
-model = joblib.load("randomforest_model1.joblib")
+model = joblib.load("best_fetal_health_model.joblib")
+
 
 st.title("🩺 Fetal Health Prediction App")
 st.write("This app predicts **fetal health status** (Normal, Suspect, Pathological).")
@@ -56,4 +57,5 @@ if st.button("Predict Fetal Health"):
         st.warning("⚠️ Predicted Fetal Health: **Suspect**")
     else:
         st.error("🚨 Predicted Fetal Health: **Pathological**")
+
 

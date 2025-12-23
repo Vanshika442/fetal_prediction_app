@@ -39,7 +39,7 @@ input_df = pd.DataFrame([{
     "uterine_contractions": uterine_contractions,
     "light_decelerations": light_decelerations,
     "severe_decelerations": severe_decelerations,
-    "prolonged_decelerations": prolongued_decelerations,
+    "prolongued_decelerations": prolongued_decelerations,
     "mean_value_of_short_term_variability": mean_value_of_short_term_variability,
     "mean_value_of_long_term_variability": mean_value_of_long_term_variability,
     "histogram_mean": histogram_mean,
@@ -56,3 +56,4 @@ if st.button("Predict Fetal Health"):
         st.warning("⚠️ Predicted Fetal Health: **Suspect**")
     else:
         st.error("🚨 Predicted Fetal Health: **Pathological**")
+

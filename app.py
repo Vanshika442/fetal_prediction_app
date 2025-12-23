@@ -26,8 +26,8 @@ uterine_contractions = safe_float_input("Uterine Contractions (per second)", "[e
 light_decelerations = safe_float_input("Light Decelerations (per second)", "[e.g., 0 – 1]", "0.002")
 severe_decelerations = safe_float_input("Severe Decelerations (per second)", "[e.g., 0 – 0.1]", "0.0")
 prolongued_decelerations = safe_float_input("Prolongued Decelerations (per second)", "[e.g., 0 – 0.5]", "0.0")
-mean_short_var = safe_float_input("Mean Value of Short Term Variability", "[e.g., 0.5 – 7]", "2.0")
-mean_long_var = safe_float_input("Mean Value of Long Term Variability", "[e.g., 5 – 50]", "20")
+mean_value_of_short_term_variability = safe_float_input("Mean Value of Short Term Variability", "[e.g., 0.5 – 7]", "2.0")
+mean_value_of_long_term_variability = safe_float_input("Mean Value of Long Term Variability", "[e.g., 5 – 50]", "20")
 histogram_mean = safe_float_input("Histogram Mean", "[e.g., 100 – 150]", "120")
 histogram_variance = safe_float_input("Histogram Variance", "[e.g., 0 – 100]", "20")
 
@@ -40,8 +40,8 @@ features = np.array([[
     light_decelerations,
     severe_decelerations,
     prolongued_decelerations,
-    mean_short_var,
-    mean_long_var,
+    mean_value_of_short_term_variability,
+    mean_value_of_long_term_variability,
     histogram_mean,
     histogram_variance
 ]])
@@ -56,4 +56,5 @@ if st.button("Predict Fetal Health"):
         st.warning("⚠️ Predicted Fetal Health: **Suspect**")
     else:
         st.error("🚨 Predicted Fetal Health: **Pathological**")
+
 

@@ -1,7 +1,7 @@
 import streamlit as st
 import joblib
 import numpy as np
-import pandas as pd   # ✅ ADD THIS
+import pandas as pd   
 
 # Load model
 model = joblib.load("best_fetal_health_model.joblib")
@@ -15,7 +15,7 @@ def safe_float_input(label, hint, default="0.0"):
     try:
         return float(val)
     except ValueError:
-        st.warning(f"⚠️ Please enter a numeric value for: {label}. Using default {default}.")
+        st.warning(f" Please enter a numeric value for: {label}. Using default {default}.")
         return float(default)
 
 st.header("Enter Fetal Health Test Values")
@@ -32,7 +32,7 @@ mean_value_of_long_term_variability = safe_float_input("Long Term Variability", 
 histogram_mean = safe_float_input("Histogram Mean", "[100 – 150]", "120")
 histogram_variance = safe_float_input("Histogram Variance", "[0 – 100]", "20")
 
-# ✅ CREATE DATAFRAME WITH COLUMN NAMES (MOST IMPORTANT PART)
+
 input_df = pd.DataFrame([{
     "baseline value": baseline_value,
     "accelerations": accelerations,
@@ -52,10 +52,11 @@ if st.button("Predict Fetal Health"):
     prediction = model.predict(input_df)[0]
 
     if prediction == 1:
-        st.success("✅ Predicted Fetal Health: **Normal**")
+        st.success("Predicted Fetal Health: **Normal**")
     elif prediction == 2:
-        st.warning("⚠️ Predicted Fetal Health: **Suspect**")
+        st.warning("Predicted Fetal Health: **Suspect**")
     else:
-        st.error("🚨 Predicted Fetal Health: **Pathological**")
+        st.error("Predicted Fetal Health: **Pathological**")
+
 
 

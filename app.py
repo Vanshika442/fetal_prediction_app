@@ -7,7 +7,7 @@ import pandas as pd
 model = joblib.load("best_fetal_health_model.joblib")
 
 
-st.title("🩺 Fetal Health Prediction App")
+st.title("Fetal Health Prediction App")
 st.write("This app predicts **fetal health status** (Normal, Suspect, Pathological).")
 
 def safe_float_input(label, hint, default="0.0"):
@@ -57,6 +57,7 @@ if st.button("Predict Fetal Health"):
         st.warning("Predicted Fetal Health: **Suspect**")
     else:
         st.error("Predicted Fetal Health: **Pathological**")
+
 
 
 
